@@ -14,7 +14,7 @@
 body{
 font-family:Poppins;
 margin:0;
-background:#f4f6fb;
+background:#f4c6fb;
 color:#333;
 }
 
