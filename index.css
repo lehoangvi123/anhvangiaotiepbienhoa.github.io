@@ -3,70 +3,160 @@
    ======================================== */
 * {
   box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Arial, sans-serif;
   margin: 0;
-  background: #f4f6fb;
+  background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+  background-attachment: fixed;
   color: #333;
   line-height: 1.6;
+  overflow-x: hidden;
 }
 
 /* ========================================
    Header Section
    ======================================== */
 header {
-  background: linear-gradient(120deg, #0d47a1, #1976d2);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   text-align: center;
-  padding: 60px 20px;
+  padding: 80px 20px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Animated background particles */
+header::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 20% 50%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(255, 255, 255, 0.1) 0%, transparent 50%),
+    radial-gradient(circle at 40% 20%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  animation: float 15s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-20px); }
 }
 
 header h1 {
-  font-size: clamp(24px, 5vw, 32px);
-  margin: 0 0 10px 0;
+  font-size: clamp(28px, 6vw, 42px);
+  margin: 0 0 15px 0;
   font-weight: 700;
+  text-shadow: 2px 2px 8px rgba(0, 0, 0, 0.3);
+  letter-spacing: -0.5px;
+  position: relative;
+  z-index: 1;
+  animation: slideDown 0.8s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 header p {
-  font-size: clamp(16px, 3vw, 18px);
+  font-size: clamp(16px, 3.5vw, 20px);
   margin: 0;
   opacity: 0.95;
+  position: relative;
+  z-index: 1;
+  animation: slideUp 0.8s ease-out 0.2s backwards;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 0.95;
+    transform: translateY(0);
+  }
 }
 
 /* ========================================
    Call to Action Buttons
    ======================================== */
 .cta {
-  margin-top: 30px;
+  margin-top: 35px;
   display: flex;
-  gap: 15px;
+  gap: 20px;
   justify-content: center;
   flex-wrap: wrap;
+  position: relative;
+  z-index: 1;
+  animation: fadeIn 0.8s ease-out 0.4s backwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
 .btn {
   display: inline-block;
-  background: #ff5722;
-  padding: 14px 32px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  padding: 16px 40px;
   color: white;
-  border-radius: 8px;
+  border-radius: 50px;
   text-decoration: none;
   font-weight: 600;
-  font-size: 16px;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba(255, 87, 34, 0.3);
+  font-size: 17px;
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  box-shadow: 0 8px 25px rgba(245, 87, 108, 0.4);
+  position: relative;
+  overflow: hidden;
+  border: 2px solid transparent;
+}
+
+/* Shine effect on hover */
+.btn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.btn:hover::before {
+  left: 100%;
 }
 
 .btn:hover {
-  background: #e64a19;
-  transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(255, 87, 34, 0.4);
+  transform: translateY(-5px) scale(1.05);
+  box-shadow: 0 15px 35px rgba(245, 87, 108, 0.5);
+  border-color: rgba(255, 255, 255, 0.5);
 }
 
 .btn:active {
-  transform: translateY(0);
+  transform: translateY(-2px) scale(1.02);
+  box-shadow: 0 8px 20px rgba(245, 87, 108, 0.4);
 }
 
 /* ========================================
@@ -79,41 +169,158 @@ section {
 }
 
 /* ========================================
-   Card Components
+   Card Components (Glassmorphism Design)
    ======================================== */
 .card {
-  background: white;
-  padding: 30px;
-  border-radius: 12px;
-  margin-bottom: 25px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 35px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+  box-shadow: 
+    0 8px 32px rgba(31, 38, 135, 0.15),
+    0 2px 8px rgba(0, 0, 0, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.8);
+  transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  position: relative;
+  overflow: hidden;
+}
+
+/* Gradient border effect */
+.card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border-radius: 20px;
+  padding: 2px;
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+  -webkit-mask: 
+    linear-gradient(#fff 0 0) content-box, 
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.card:hover::before {
+  opacity: 1;
 }
 
 .card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: 
+    0 20px 50px rgba(102, 126, 234, 0.25),
+    0 10px 20px rgba(0, 0, 0, 0.1);
+  border-color: rgba(102, 126, 234, 0.3);
+}
+
+/* Shine effect from top-left corner */
+.card::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: linear-gradient(
+    45deg,
+    transparent,
+    rgba(255, 255, 255, 0.1),
+    transparent
+  );
+  transform: rotate(45deg);
+  transition: all 0.6s;
+}
+
+.card:hover::after {
+  left: 100%;
 }
 
 /* ========================================
    Typography
    ======================================== */
 h2 {
-  color: #0d47a1;
-  font-size: clamp(20px, 4vw, 26px);
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: clamp(22px, 4.5vw, 28px);
   margin-top: 0;
-  margin-bottom: 20px;
+  margin-bottom: 25px;
   font-weight: 700;
+  position: relative;
+  display: inline-block;
+  padding-bottom: 10px;
+}
+
+/* Animated underline */
+h2::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border-radius: 2px;
+  transition: width 0.4s ease;
+}
+
+.card:hover h2::after {
+  width: 100%;
 }
 
 ul {
-  padding-left: 20px;
+  padding-left: 25px;
   margin: 0;
+  list-style: none;
 }
 
 ul li {
-  margin-bottom: 12px;
+  margin-bottom: 16px;
   font-size: 16px;
+  position: relative;
+  padding-left: 30px;
+  transition: all 0.3s ease;
+}
+
+/* Custom bullet points */
+ul li::before {
+  content: '✓';
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 24px;
+  height: 24px;
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  color: white;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  font-size: 14px;
+  box-shadow: 0 2px 8px rgba(102, 126, 234, 0.3);
+  transition: all 0.3s ease;
+}
+
+ul li:hover {
+  padding-left: 35px;
+  color: #667eea;
+}
+
+ul li:hover::before {
+  transform: rotate(360deg) scale(1.2);
+  box-shadow: 0 4px 12px rgba(102, 126, 234, 0.5);
+}
+
+strong {
+  color: #667eea;
+  font-weight: 600;
 }
 
 /* ========================================
@@ -121,31 +328,70 @@ ul li {
    ======================================== */
 .contact-info {
   text-align: center;
+  background: linear-gradient(135deg, rgba(102, 126, 234, 0.05), rgba(118, 75, 162, 0.05));
+  border: 2px dashed rgba(102, 126, 234, 0.3);
 }
 
 .contact-info p {
-  font-size: 18px;
-  margin-bottom: 20px;
+  font-size: 19px;
+  margin-bottom: 25px;
+  color: #555;
 }
 
 .contact-info b {
-  color: #0d47a1;
-  font-size: 24px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  font-size: 32px;
+  font-weight: 700;
+  display: inline-block;
+  position: relative;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.05);
+  }
 }
 
 /* ========================================
    Footer
    ======================================== */
 footer {
-  background: #0d47a1;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;
   text-align: center;
-  padding: 25px 20px;
-  font-size: 14px;
+  padding: 30px 20px;
+  font-size: 15px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 -5px 20px rgba(0, 0, 0, 0.1);
+}
+
+footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: 
+    radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%),
+    radial-gradient(circle at 70% 50%, rgba(255, 255, 255, 0.05) 0%, transparent 50%);
+  pointer-events: none;
 }
 
 footer p {
   margin: 0;
+  position: relative;
+  z-index: 1;
+  opacity: 0.95;
+  letter-spacing: 0.5px;
 }
 
 /* ========================================
@@ -153,19 +399,148 @@ footer p {
    ======================================== */
 @media (max-width: 600px) {
   header {
-    padding: 40px 20px;
+    padding: 50px 20px;
+  }
+  
+  header h1 {
+    font-size: 26px;
+  }
+  
+  header p {
+    font-size: 15px;
   }
   
   .card {
-    padding: 20px;
+    padding: 25px;
+    border-radius: 15px;
   }
   
   .btn {
-    padding: 12px 24px;
+    padding: 14px 30px;
     font-size: 15px;
   }
   
   .contact-info b {
-    font-size: 20px;
+    font-size: 24px;
+  }
+  
+  h2 {
+    font-size: 22px;
+  }
+  
+  ul li {
+    font-size: 15px;
+    margin-bottom: 14px;
+  }
+}
+
+/* Tablet view */
+@media (min-width: 601px) and (max-width: 1024px) {
+  section {
+    padding: 50px 30px;
+  }
+  
+  .card {
+    padding: 32px;
+  }
+}
+
+/* Large screens */
+@media (min-width: 1400px) {
+  section {
+    max-width: 1200px;
+  }
+  
+  .card {
+    padding: 40px;
+  }
+}
+
+/* ========================================
+   Scroll Animations (Fade in on scroll)
+   ======================================== */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeInUp 0.6s ease-out backwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+
+/* ========================================
+   Loading Animation
+   ======================================== */
+@keyframes gradientShift {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+/* ========================================
+   Custom Scrollbar
+   ======================================== */
+::-webkit-scrollbar {
+  width: 12px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #667eea, #764ba2);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #764ba2, #667eea);
+}
+
+/* ========================================
+   Selection Color
+   ======================================== */
+::selection {
+  background: #667eea;
+  color: white;
+}
+
+::-moz-selection {
+  background: #667eea;
+  color: white;
+}
+
+/* ========================================
+   Focus Styles (Accessibility)
+   ======================================== */
+a:focus, button:focus {
+  outline: 3px solid #667eea;
+  outline-offset: 3px;
+}
+
+/* ========================================
+   Print Styles
+   ======================================== */
+@media print {
+  header::before,
+  .card::before,
+  .card::after,
+  footer::before {
+    display: none;
+  }
+  
+  .btn {
+    border: 2px solid #667eea;
+    color: #667eea;
   }
 }
