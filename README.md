@@ -8,7 +8,7 @@
 
 <meta property="og:title" content="Học Tiếng Anh Giao Tiếp Biên Hòa">
 <meta property="og:description" content="Trung tâm Anh văn giao tiếp cho người đi làm. Lớp nhỏ, cam kết giao tiếp được.">
-<meta property="og:type" content="website">
+<meta property="og:type" content="website"> 
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
